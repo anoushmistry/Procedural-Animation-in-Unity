@@ -8,9 +8,9 @@ This project demonstrates procedural animation in Unity using the Animation Rigg
 
 Head tracking using a Multi-Aim Constraint.
 
-Two-Bone IK for arms and legs.
+Two-Bone IK for arms used for environment interactions (similar to those in Uncharted 4).
 
-Dynamic constraint weighting controlled through scripts for smooth blending between procedural and keyframed animation.
+Dynamic constraint weighting controlled through scripts for smooth blending between procedural and keyframed animation (In Progress).
 
 Example character prefab with a working rig and procedural behaviors.
 
