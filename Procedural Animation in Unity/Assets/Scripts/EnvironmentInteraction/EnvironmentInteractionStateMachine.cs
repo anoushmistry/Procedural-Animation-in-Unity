@@ -3,6 +3,7 @@ using NUnit.Framework;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using Sirenix.OdinInspector;
 
 public class EnvironmentInteractionStateMachine : StateManager<EnvironmentInteractionStateMachine.EEnvironmentInteractionState>
 {
@@ -30,7 +31,7 @@ public class EnvironmentInteractionStateMachine : StateManager<EnvironmentIntera
         ValidateConstraints();
         
         context = new EnvironmentInteractionContext(leftBoneIkConstraint, rightBoneIkConstraint,
-            leftMultiRotationConstraint, rightMultiRotationConstraint, rigidbody, rootCollider);
+            leftMultiRotationConstraint, rightMultiRotationConstraint, rigidbody, rootCollider, transform.root);
         
         InitializeStates();
     }
@@ -45,14 +46,16 @@ public class EnvironmentInteractionStateMachine : StateManager<EnvironmentIntera
         Assert.IsNotNull(rootCollider, "RootCollider is not assigned");
     }
 
+    
     public void InitializeStates()
     {
        m_States.Add(EEnvironmentInteractionState.Reset, new ResetState(context,EEnvironmentInteractionState.Reset));
-       m_States.Add(EEnvironmentInteractionState.Search, new ResetState(context,EEnvironmentInteractionState.Search));
-       m_States.Add(EEnvironmentInteractionState.Approach, new ResetState(context,EEnvironmentInteractionState.Approach));
-       m_States.Add(EEnvironmentInteractionState.Rise, new ResetState(context,EEnvironmentInteractionState.Rise));
-       m_States.Add(EEnvironmentInteractionState.Touch, new ResetState(context,EEnvironmentInteractionState.Touch));
+       m_States.Add(EEnvironmentInteractionState.Search, new SearchState(context,EEnvironmentInteractionState.Search));
+       m_States.Add(EEnvironmentInteractionState.Approach, new ApproachState(context,EEnvironmentInteractionState.Approach));
+       m_States.Add(EEnvironmentInteractionState.Rise, new RiseState(context,EEnvironmentInteractionState.Rise));
+       m_States.Add(EEnvironmentInteractionState.Touch, new TouchState(context,EEnvironmentInteractionState.Touch));
 
        CurrentState = m_States[EEnvironmentInteractionState.Reset];
     }
+    
 }

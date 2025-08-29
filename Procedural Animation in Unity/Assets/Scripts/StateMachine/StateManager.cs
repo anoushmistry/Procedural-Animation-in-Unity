@@ -25,7 +25,7 @@ public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
         }
         else if(!isTransitioning)
         {
-            TransitionToState(CurrentState.StateKey);
+            TransitionToState(nextStateKey);
         }
     }
 

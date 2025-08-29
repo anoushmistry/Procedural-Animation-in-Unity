@@ -5,7 +5,7 @@ public class SearchState : EnvironmentInteractionState
     public SearchState(EnvironmentInteractionContext context,
         EnvironmentInteractionStateMachine.EEnvironmentInteractionState estate) : base(context, estate)
     {
-        EnvironmentInteractionContext Context = base.context;
+        EnvironmentInteractionContext Context = context;
     }
 
     public override void EnterState()
@@ -30,7 +30,7 @@ public class SearchState : EnvironmentInteractionState
 
     public override void OnTriggerEnter(Collider other)
     {
-        
+        StartIkTargetPositionTracking(other);
     }
 
     public override void OnTriggerStay(Collider other)

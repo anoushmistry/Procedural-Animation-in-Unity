@@ -5,7 +5,7 @@ public class RiseState : EnvironmentInteractionState
     public RiseState(EnvironmentInteractionContext context,
         EnvironmentInteractionStateMachine.EEnvironmentInteractionState estate) : base(context, estate)
     {
-        EnvironmentInteractionContext Context = base.context;
+        EnvironmentInteractionContext Context = context;
     }
 
     public override void EnterState()
