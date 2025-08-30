@@ -35,11 +35,11 @@ public class SearchState : EnvironmentInteractionState
 
     public override void OnTriggerStay(Collider other)
     {
-        
+        UpdateIkTargetPosition(other);
     }
 
     public override void OnTriggerExit(Collider other)
     {
-        
+        ResetIkTargetPositionTracking(other);
     }
 }

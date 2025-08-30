@@ -16,7 +16,7 @@ public class EnvironmentInteractionStateMachine : StateManager<EnvironmentIntera
         Reset,
     }
 
-    private EnvironmentInteractionContext context;
+    private EnvironmentInteractionContext _context;
     
     [SerializeField] private TwoBoneIKConstraint leftBoneIkConstraint;
     [SerializeField] private TwoBoneIKConstraint rightBoneIkConstraint;
@@ -26,14 +26,25 @@ public class EnvironmentInteractionStateMachine : StateManager<EnvironmentIntera
     [SerializeField] private CapsuleCollider rootCollider;
 
 
-    private void Awake()
+    private void OnDrawGizmosSelected()
+    {
+        if (!Application.isPlaying) return;
+        Gizmos.color = Color.red;
+        if (_context.ClosestPointOnColliderFromShoulder != null)
+        {
+            Gizmos.DrawSphere(_context.ClosestPointOnColliderFromShoulder, 0.03f);
+        }
+    }
+
+    void Awake()
     {
         ValidateConstraints();
         
-        context = new EnvironmentInteractionContext(leftBoneIkConstraint, rightBoneIkConstraint,
+        _context = new EnvironmentInteractionContext(leftBoneIkConstraint, rightBoneIkConstraint,
             leftMultiRotationConstraint, rightMultiRotationConstraint, rigidbody, rootCollider, transform.root);
         
         InitializeStates();
+        //ConstructEnvironmentDetectionCollider();
     }
 
     private void ValidateConstraints()
@@ -49,13 +60,21 @@ public class EnvironmentInteractionStateMachine : StateManager<EnvironmentIntera
     
     public void InitializeStates()
     {
-       m_States.Add(EEnvironmentInteractionState.Reset, new ResetState(context,EEnvironmentInteractionState.Reset));
-       m_States.Add(EEnvironmentInteractionState.Search, new SearchState(context,EEnvironmentInteractionState.Search));
-       m_States.Add(EEnvironmentInteractionState.Approach, new ApproachState(context,EEnvironmentInteractionState.Approach));
-       m_States.Add(EEnvironmentInteractionState.Rise, new RiseState(context,EEnvironmentInteractionState.Rise));
-       m_States.Add(EEnvironmentInteractionState.Touch, new TouchState(context,EEnvironmentInteractionState.Touch));
+       m_States.Add(EEnvironmentInteractionState.Reset, new ResetState(_context,EEnvironmentInteractionState.Reset));
+       m_States.Add(EEnvironmentInteractionState.Search, new SearchState(_context,EEnvironmentInteractionState.Search));
+       m_States.Add(EEnvironmentInteractionState.Approach, new ApproachState(_context,EEnvironmentInteractionState.Approach));
+       m_States.Add(EEnvironmentInteractionState.Rise, new RiseState(_context,EEnvironmentInteractionState.Rise));
+       m_States.Add(EEnvironmentInteractionState.Touch, new TouchState(_context,EEnvironmentInteractionState.Touch));
 
        CurrentState = m_States[EEnvironmentInteractionState.Reset];
     }
-    
+
+    // private void ConstructEnvironmentDetectionCollider()
+    // {
+    //     float wingSpan = rootCollider.height;
+    //     BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
+    //     boxCollider.size = new Vector3(wingSpan,wingSpan,wingSpan);
+    //     boxCollider.center = new Vector3(rootCollider.center.x, rootCollider.center.y + (0.25f * wingSpan),rootCollider.center.z + (0.5f * wingSpan));
+    //     boxCollider.isTrigger = true;
+    // }
 }

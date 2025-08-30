@@ -17,6 +17,7 @@ public class EnvironmentInteractionContext : MonoBehaviour
     private CapsuleCollider rootCollider;
     private Transform rootTransform;
 
+    public float CharacterShoulderHeight;
     public EnvironmentInteractionContext(TwoBoneIKConstraint leftBoneIkConstraint,
         TwoBoneIKConstraint rightBoneIkConstraint, MultiRotationConstraint leftMultiRotationConstraint,
         MultiRotationConstraint rightMultiRotationConstraint, Rigidbody rigidbody, CapsuleCollider rootCollider, Transform rootTransform)
@@ -28,27 +29,27 @@ public class EnvironmentInteractionContext : MonoBehaviour
         this.rigidbody = rigidbody;
         this.rootCollider = rootCollider;
         this.rootTransform = rootTransform;
+        
+        CharacterShoulderHeight = leftBoneIkConstraint.data.root.transform.position.y;
     }
 
     // Read-Only Properties
     public TwoBoneIKConstraint LeftBoneIkConstraint => leftBoneIkConstraint;
-
     public TwoBoneIKConstraint RightBoneIkConstraint => rightBoneIkConstraint;
-
     public MultiRotationConstraint LeftMultiRotationConstraint => leftMultiRotationConstraint;
-
     public MultiRotationConstraint RightMultiRotationConstraint => rightMultiRotationConstraint;
-
     public Rigidbody Rigidbody => rigidbody;
 
     public CapsuleCollider RootCollider => rootCollider;
     public Transform RootTransform => rootTransform;
 
+    public Collider CurrentIntersectingCollider {get; set;}
     public TwoBoneIKConstraint CurrentIkConstraint { get; private set; }
     public MultiRotationConstraint CurrentMultiRotationConstraint { get; private set; }
     public Transform CurrentIkTargetTransform { get; private set; }
     public Transform CurrentShoulderTransform { get; private set; }
     public EBodySide CurrentBodySide { get; private set; }
+    public Vector3 ClosestPointOnColliderFromShoulder { get; set; } = Vector3.positiveInfinity;
 
     public void SetCurrentSide(Vector3 positionToCheck)
     {
