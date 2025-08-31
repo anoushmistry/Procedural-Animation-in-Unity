@@ -405,7 +405,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.407
+      value: -0.12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1239,7 +1239,6 @@ GameObject:
   - component: {fileID: 772173296}
   - component: {fileID: 772173295}
   - component: {fileID: 772173297}
-  - component: {fileID: 772173298}
   m_Layer: 0
   m_Name: Environmental Rig
   m_TagString: Untagged
@@ -1360,27 +1359,6 @@ MonoBehaviour:
   rightMultiRotationConstraint: {fileID: 485359957}
   rigidbody: {fileID: 407753368}
   rootCollider: {fileID: 407753367}
---- !u!65 &772173298
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 772173294}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.8, y: 1.8, z: 1.8}
-  m_Center: {x: 0, y: 1.25, z: 0.9}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

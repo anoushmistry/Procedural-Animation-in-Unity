@@ -44,7 +44,7 @@ public class EnvironmentInteractionStateMachine : StateManager<EnvironmentIntera
             leftMultiRotationConstraint, rightMultiRotationConstraint, rigidbody, rootCollider, transform.root);
         
         InitializeStates();
-        //ConstructEnvironmentDetectionCollider();
+        ConstructEnvironmentDetectionCollider();
     }
 
     private void ValidateConstraints()
@@ -69,12 +69,12 @@ public class EnvironmentInteractionStateMachine : StateManager<EnvironmentIntera
        CurrentState = m_States[EEnvironmentInteractionState.Reset];
     }
 
-    // private void ConstructEnvironmentDetectionCollider()
-    // {
-    //     float wingSpan = rootCollider.height;
-    //     BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
-    //     boxCollider.size = new Vector3(wingSpan,wingSpan,wingSpan);
-    //     boxCollider.center = new Vector3(rootCollider.center.x, rootCollider.center.y + (0.25f * wingSpan),rootCollider.center.z + (0.5f * wingSpan));
-    //     boxCollider.isTrigger = true;
-    // }
+    private void ConstructEnvironmentDetectionCollider()
+    {
+        float wingSpan = rootCollider.height;
+        BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
+        boxCollider.size = new Vector3(wingSpan,wingSpan,wingSpan);
+        boxCollider.center = new Vector3(rootCollider.center.x, rootCollider.center.y + (0.25f * wingSpan),rootCollider.center.z + (0.5f * wingSpan));
+        boxCollider.isTrigger = true;
+    }
 }
