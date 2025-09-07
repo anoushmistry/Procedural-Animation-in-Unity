@@ -12,6 +12,8 @@ Two-Bone IK for arms used for environment interactions (similar to those in Unch
 
 Dynamic constraint weighting controlled through scripts for smooth blending between procedural and keyframed animation (In Progress).
 
+Concrete States like Reset, Search, Approach, Rise, Touch each having their own implementation.
+
 Example character prefab with a working rig and procedural behaviors.
 
 ## **Reference:**
