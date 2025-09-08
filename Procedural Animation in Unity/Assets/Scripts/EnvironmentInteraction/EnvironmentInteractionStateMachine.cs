@@ -76,5 +76,7 @@ public class EnvironmentInteractionStateMachine : StateManager<EnvironmentIntera
         boxCollider.size = new Vector3(wingSpan,wingSpan,wingSpan);
         boxCollider.center = new Vector3(rootCollider.center.x, rootCollider.center.y + (0.25f * wingSpan),rootCollider.center.z + (0.5f * wingSpan));
         boxCollider.isTrigger = true;
+        
+        _context.ColliderCenterY = rootCollider.center.y;
     }
 }

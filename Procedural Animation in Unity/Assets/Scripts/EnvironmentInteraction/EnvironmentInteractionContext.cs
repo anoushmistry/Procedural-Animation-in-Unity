@@ -16,6 +16,7 @@ public class EnvironmentInteractionContext : MonoBehaviour
     private Rigidbody rigidbody;
     private CapsuleCollider rootCollider;
     private Transform rootTransform;
+    private Vector3 leftOriginalTargetPosition, rightOriginalTargetPosition;
 
     public float CharacterShoulderHeight;
     public EnvironmentInteractionContext(TwoBoneIKConstraint leftBoneIkConstraint,
@@ -29,8 +30,12 @@ public class EnvironmentInteractionContext : MonoBehaviour
         this.rigidbody = rigidbody;
         this.rootCollider = rootCollider;
         this.rootTransform = rootTransform;
+        this.leftOriginalTargetPosition = leftBoneIkConstraint.data.target.transform.localPosition;
+        this.rightOriginalTargetPosition = rightBoneIkConstraint.data.target.transform.localPosition;
+        OriginalTargetRotation = leftBoneIkConstraint.data.target.rotation;
         
         CharacterShoulderHeight = leftBoneIkConstraint.data.root.transform.position.y;
+        SetCurrentSide(Vector3.positiveInfinity);
     }
 
     // Read-Only Properties
@@ -50,6 +55,11 @@ public class EnvironmentInteractionContext : MonoBehaviour
     public Transform CurrentShoulderTransform { get; private set; }
     public EBodySide CurrentBodySide { get; private set; }
     public Vector3 ClosestPointOnColliderFromShoulder { get; set; } = Vector3.positiveInfinity;
+    
+    public float ColliderCenterY { get; set; }
+    public float InteractionPointYOffset { get; set; } = 0;
+    public Vector3 CurrentOriginalTargetPosition { get; private set; }
+    public Quaternion OriginalTargetRotation { get; private set; }
 
     public void SetCurrentSide(Vector3 positionToCheck)
     {
@@ -71,6 +81,7 @@ public class EnvironmentInteractionContext : MonoBehaviour
             CurrentBodySide = EBodySide.LEFT;
             CurrentIkConstraint = leftBoneIkConstraint;
             CurrentMultiRotationConstraint = leftMultiRotationConstraint;
+            CurrentOriginalTargetPosition = leftOriginalTargetPosition;
         }
         else
         {
@@ -78,6 +89,7 @@ public class EnvironmentInteractionContext : MonoBehaviour
             CurrentBodySide = EBodySide.RIGHT;
             CurrentIkConstraint = rightBoneIkConstraint;
             CurrentMultiRotationConstraint = rightMultiRotationConstraint;
+            CurrentOriginalTargetPosition = rightOriginalTargetPosition;
         }
 
         CurrentIkTargetTransform = CurrentIkConstraint.data.target.transform;
