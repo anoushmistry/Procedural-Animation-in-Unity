@@ -8,7 +8,7 @@ public class RiseState : EnvironmentInteractionState
     private Quaternion expectedRotation;
     private float rayMaxDistance = 0.5f;
     private LayerMask interactableLayerMask = LayerMask.GetMask("Interactable");
-    private float rotationSpeed = 1000f;
+    private float rotationSpeed = 500f;
     
     private float touchDistanceThreshold = 0.05f;
     private float touchTimeThreshold = 1f;
@@ -68,6 +68,11 @@ public class RiseState : EnvironmentInteractionState
 
     public override EnvironmentInteractionStateMachine.EEnvironmentInteractionState GetNextState()
     {
+        if (CheckShouldReset())
+        {
+            return EnvironmentInteractionStateMachine.EEnvironmentInteractionState.Reset;
+        }
+        
         Debug.Log(Vector3.Distance(Context.CurrentIkTargetTransform.position,
             Context.ClosestPointOnColliderFromShoulder));
         if (Vector3.Distance(Context.CurrentIkTargetTransform.position, Context.ClosestPointOnColliderFromShoulder) <

@@ -43,8 +43,8 @@ public class EnvironmentInteractionStateMachine : StateManager<EnvironmentIntera
         _context = new EnvironmentInteractionContext(leftBoneIkConstraint, rightBoneIkConstraint,
             leftMultiRotationConstraint, rightMultiRotationConstraint, rigidbody, rootCollider, transform.root);
         
-        InitializeStates();
         ConstructEnvironmentDetectionCollider();
+        InitializeStates();
     }
 
     private void ValidateConstraints()

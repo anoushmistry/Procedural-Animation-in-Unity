@@ -26,6 +26,10 @@ public class SearchState : EnvironmentInteractionState
 
     public override EnvironmentInteractionStateMachine.EEnvironmentInteractionState GetNextState()
     {
+        if (CheckShouldReset())
+        {
+            return EnvironmentInteractionStateMachine.EEnvironmentInteractionState.Reset;
+        }
         bool isCloseToTarget, isClosestPointOnColliderValid; 
         
         isCloseToTarget = Vector3.Distance(Context.ClosestPointOnColliderFromShoulder, Context.RootTransform.position) <

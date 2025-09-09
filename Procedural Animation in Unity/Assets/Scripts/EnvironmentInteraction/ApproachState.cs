@@ -44,7 +44,8 @@ public class ApproachState : EnvironmentInteractionState
     {
         bool isOverStateLifeDuration = elapsedTime >= approachStateDuration;
 
-        if (isOverStateLifeDuration) return EnvironmentInteractionStateMachine.EEnvironmentInteractionState.Reset;
+        if (isOverStateLifeDuration || CheckShouldReset())
+            return EnvironmentInteractionStateMachine.EEnvironmentInteractionState.Reset;
         
         bool isWithinReach =
             Vector3.Distance(Context.ClosestPointOnColliderFromShoulder, Context.CurrentShoulderTransform.position) <

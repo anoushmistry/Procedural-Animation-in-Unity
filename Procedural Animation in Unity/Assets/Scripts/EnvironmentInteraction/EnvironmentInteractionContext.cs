@@ -60,7 +60,7 @@ public class EnvironmentInteractionContext : MonoBehaviour
     public float InteractionPointYOffset { get; set; } = 0;
     public Vector3 CurrentOriginalTargetPosition { get; private set; }
     public Quaternion OriginalTargetRotation { get; private set; }
-
+    public float LowestDistance { get; set; } = Mathf.Infinity;
     public void SetCurrentSide(Vector3 positionToCheck)
     {
         Vector3
